@@ -1,7 +1,6 @@
 package com.sakitam1023.chat2cq;
 
 import com.google.gson.Gson;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -20,17 +19,14 @@ public class PluginListener extends WebSocketClient implements Listener{
 
 	@EventHandler()
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
-		
 		sendMessage(event.getPlayer().getName() + ":" + event.getMessage());
-		
-		Bukkit.getServer().broadcastMessage(event.getPlayer().getName() + ":" + event.getMessage());
-		
+		//Bukkit.getServer().broadcastMessage(event.getPlayer().getName() + ":" + event.getMessage());
 	}
 
 	private void sendMessage(String str) {
 		AskQQMessage askMessage = new AskQQMessage();
 		askMessage.setAct("101");
-		askMessage.setGroupid("673221698");
+		askMessage.setGroupid("673221698"); // are you really want to hardcode?
 		askMessage.setMsg(str);
 		String ask = new Gson().toJson(askMessage);
 		send(ask);
